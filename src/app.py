@@ -12,12 +12,28 @@ from streamlit_tags import st_tags
 from seekers.job_seeker import JobSeeker
 from seekers.openai_seeker import OpenAISeeker
 
+import os
 import requests
-
+import tarfile
 
 seekers = {
     "openai.com": OpenAISeeker,
 }
+
+def extract_driver(filename: str) -> None:
+    """ Extract geckodriver from compress file and set the properly
+    permissions """
+
+    # Untar .tar.gz file
+    with tarfile.open(filename, "r:gz") as tar:
+        tar.extractall()
+        print(f"Extracted {filename}")
+
+    # Remove .tar.gz file
+    os.remove(filename)
+
+    # Set permissions to geckodriver
+    os.chmod("geckodriver", 0o755)
 
 def download_geckodriver():
     """ Function to download latest geckodriver version. """
@@ -37,6 +53,8 @@ def download_geckodriver():
     else:
         raise Exception("Failed to download geckodriver!")
 
+    # Extract driver file
+    extract_driver(filename)
 
 def process_job_descriptions(job_descriptions: list, stack: list) -> dict:
     """Method to retrieve keywords into job descriptions"""
