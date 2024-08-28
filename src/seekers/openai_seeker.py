@@ -14,6 +14,7 @@ class OpenAISeeker(JobSeeker):
         # virtual display.
         self.display = Display(visible=0, size=(800, 600))
         self.display.start()
+        print("Display started!")
         self.browser = webdriver.Firefox()
         self.browser.get(self.page_url)
         return self
@@ -23,6 +24,7 @@ class OpenAISeeker(JobSeeker):
 
     def get_job_description(self) -> str:
         """Extract job description from current page data"""
+        print(f"Trying to extract job description from: {self.page_url}")
         element = self.browser.find_element(By.ID, "main")
         self.job_data["description"] = element.text
 
