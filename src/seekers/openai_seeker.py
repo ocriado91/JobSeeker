@@ -3,6 +3,8 @@
 
 from pyvirtualdisplay import Display
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from seekers.job_seeker import JobSeeker
 from webdriver_manager.firefox import GeckoDriverManager
@@ -16,9 +18,24 @@ class OpenAISeeker(JobSeeker):
         self.display = Display(visible=0, size=(800, 600))
         self.display.start()
         print("Display started!")
-        self.browser = webdriver.Firefox(
+
+        # Define the geckodriver path through Selenium Firefox webdriver
+        # service, extract default Firefox options and pass them to
+        # Firefox webdriver.
+        service = Service(
             executable_path=GeckoDriverManager().install()
+
         )
+
+        options = Options()
+        options.add_argument("--disable-gpu")
+        options.add_argument("--headless")
+
+        self.browser = webdriver.Firefox(
+            service=service,
+            options=options,
+        )
+
         print(f"Extracting data from {self.page_url}")
         self.browser.get(self.page_url)
         return self
