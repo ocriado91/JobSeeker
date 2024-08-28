@@ -34,7 +34,7 @@ def process_job_descriptions(job_descriptions: list, stack: list) -> dict:
 
 
 def read_new_file(
-    stack_file: str = "JobSeeker/data/default_stack.dat",
+    stack_file: str = "data/default_stack.dat",
 ) -> list:
     """Read stack file and export as list
 
@@ -51,7 +51,7 @@ def read_new_file(
 
 
 def read_stack_file(
-    stack_file: str = "JobSeeker/data/default_stack.dat",
+    stack_file: str = "data/default_stack.dat",
 ) -> list:
     """Read stack file and export as list
 

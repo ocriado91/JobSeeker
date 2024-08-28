@@ -1,0 +1,5 @@
+PyVirtualDisplay==3.0
+selenium==4.23.1
+stqdm==0.0.5
+streamlit==1.36.0
+streamlit_tags==1.2.8
