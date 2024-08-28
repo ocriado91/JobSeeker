@@ -22,7 +22,7 @@ seekers = {
 def download_geckodriver():
     """ Function to download latest geckodriver version. """
 
-    url = "https://github.com/mozilla/geckodriver/releases/latest/download/geckodriver-v0.33.0-linux64.tar.gz"
+    url = "https://github.com/mozilla/geckodriver/releases/download/v0.35.0/geckodriver-v0.35.0-linux64.tar.gz"
     filename = url.split("/")[-1]
 
     # Download the file
