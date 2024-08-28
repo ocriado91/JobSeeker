@@ -12,10 +12,30 @@ from streamlit_tags import st_tags
 from seekers.job_seeker import JobSeeker
 from seekers.openai_seeker import OpenAISeeker
 
+import requests
+
 
 seekers = {
     "openai.com": OpenAISeeker,
 }
+
+def download_geckodriver():
+    """ Function to download latest geckodriver version. """
+
+    url = "https://github.com/mozilla/geckodriver/releases/latest/download/geckodriver-v0.33.0-linux64.tar.gz"
+    filename = url.split("/")[-1]
+
+    # Download the file
+    print(f"Downloading geckodriver from {url}...")
+    response = requests.get(url)
+
+    # Open file if GET was ok
+    if response.status_code == 200:
+        with open(filename, "wb") as file:
+            file.write(response.content)
+        print(f"Downloaded {filename}")
+    else:
+        raise Exception("Failed to download geckodriver!")
 
 
 def process_job_descriptions(job_descriptions: list, stack: list) -> dict:
@@ -92,6 +112,10 @@ def extract_seeker(job_offer: str) -> JobSeeker:
 
 
 if __name__ == "__main__":
+
+    # Try to retrieve geckodriver
+    download_geckodriver()
+
     # Title of Streamlit UI
     st.title("Job Seeker")
     st.divider()
