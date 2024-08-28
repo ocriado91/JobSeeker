@@ -24,6 +24,7 @@ def extract_driver(filename: str) -> None:
     """ Extract geckodriver from compress file and set the properly
     permissions """
 
+    print(f"Trying to extract {filename}...")
     # Untar .tar.gz file
     with tarfile.open(filename, "r:gz") as tar:
         tar.extractall()
@@ -40,6 +41,9 @@ def download_geckodriver():
 
     url = "https://github.com/mozilla/geckodriver/releases/download/v0.35.0/geckodriver-v0.35.0-linux64.tar.gz"
     filename = url.split("/")[-1]
+
+    # Remove previous .tar.gz file
+    os.remove(filename)
 
     # Download the file
     print(f"Downloading geckodriver from {url}...")
