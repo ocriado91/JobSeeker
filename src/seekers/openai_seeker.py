@@ -16,6 +16,7 @@ class OpenAISeeker(JobSeeker):
         self.display.start()
         print("Display started!")
         self.browser = webdriver.Firefox()
+        print(f"Extracting data from {self.page_url}")
         self.browser.get(self.page_url)
         return self
 
