@@ -5,6 +5,7 @@ from pyvirtualdisplay import Display
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from seekers.job_seeker import JobSeeker
+from webdriver_manager.firefox import GeckoDriverManager
 
 
 class OpenAISeeker(JobSeeker):
@@ -15,7 +16,9 @@ class OpenAISeeker(JobSeeker):
         self.display = Display(visible=0, size=(800, 600))
         self.display.start()
         print("Display started!")
-        self.browser = webdriver.Firefox()
+        self.browser = webdriver.Firefox(
+            executable_path=GeckoDriverManager().install()
+        )
         print(f"Extracting data from {self.page_url}")
         self.browser.get(self.page_url)
         return self
