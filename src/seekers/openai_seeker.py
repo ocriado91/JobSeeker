@@ -28,8 +28,6 @@ class OpenAISeeker(JobSeeker):
         )
 
         options = Options()
-        options.add_argument("--disable-gpu")
-        options.add_argument("--headless")
 
         self.browser = webdriver.Firefox(
             service=service,
