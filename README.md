@@ -22,11 +22,15 @@ and ensuring they stay ahead in their careers.
 
 ## Installation
 
-`JobSeeker` offers a simple and intuitive interface based on a **Streamlit** app, providing flexibility in how you choose to run it. You can use `JobSeeker` either directly through **Streamlit Cloud** or run it locally on your machine:
+`JobSeeker` offers a simple and intuitive interface based on a **Streamlit** app,
+providing flexibility in how you choose to run it. You can use `JobSeeker`
+either directly through **Streamlit Cloud** or run it locally on your machine:
 
 ### Streamlit App
 
-You can access and use `JobSeeker` without any local setup through **Streamlit Cloud** by visiting the following link: [https://job-seeker-app.streamlit.app/](https://job-seeker-app.streamlit.app/).
+You can access and use `JobSeeker` without any local setup through
+**Streamlit Cloud** by visiting the following link:
+[https://job-seeker-app.streamlit.app/](https://job-seeker-app.streamlit.app/).
 
 ### Local Setup
 
@@ -45,3 +49,13 @@ pip install -r requirements.txt
 streamlit run src/app.py
 ```
 4. Open the provided URL in your browser to start using the app.
+
+## How to use?
+
+### Extract skills from a set of job offers
+
+![](docs/pics/job-seeker-1.gif)
+
+### Add and remove skills
+
+![](docs/pics/job-seeker-2.gif)
