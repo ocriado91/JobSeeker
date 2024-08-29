@@ -1,5 +1,8 @@
 # JobSeeker
 
+[![JobSeeker Workflow](https://github.com/ocriado91/JobSeeker/actions/workflows/test.yml/badge.svg)](https://github.com/ocriado91/JobSeeker/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/ocriado91/JobSeeker/graph/badge.svg?token=25GI0PVTZR)](https://codecov.io/gh/ocriado91/JobSeeker)
+
 <p align="center">
   <img src="https://github.com/ocriado91/JobSeeker/blob/main/docs/pics/OIG2.jpeg?raw=true"/>
 </p>
