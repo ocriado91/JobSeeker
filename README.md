@@ -1,7 +1,7 @@
 # JobSeeker
 
 <p align="center">
-  <img src="https://github.com/ocriado91/JobSeeker/blob/3-update-readmemd/docs/pics/OIG2.jpeg?raw=true"/>
+  <img src="https://github.com/ocriado91/JobSeeker/blob/main/docs/pics/OIG2.jpeg?raw=true"/>
 </p>
 
 ## :books: Description
