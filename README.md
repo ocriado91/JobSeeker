@@ -59,3 +59,16 @@ streamlit run src/app.py
 ### Add and remove skills
 
 ![](docs/pics/job-seeker-2.gif)
+
+# :construction: Design architecture
+
+`JobSeeker` uses a Streamlit application to allow users to match job offers
+required skills with a predefined list of skills. Its architecture is based in
+a set of `Seekers` components in charge of scrape the job data of the related
+company. At the low-level, this `Seekers` follow a `Abstract Factory` architecture
+to provide the same interface for all of them ([More info about Abstract Factory
+Design Pattern](https://refactoring.guru/design-patterns/abstract-factory)), being
+the Architecture Diagram:
+
+![](docs/pics/jobseeker.drawio.png)
+
