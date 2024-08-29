@@ -1,3 +1,2 @@
 xvfb
-firefox
 chrome
