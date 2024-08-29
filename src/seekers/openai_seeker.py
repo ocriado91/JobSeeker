@@ -3,8 +3,11 @@
 
 from pyvirtualdisplay import Display
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from seekers.job_seeker import JobSeeker
+from webdriver_manager.firefox import GeckoDriverManager
 
 
 class OpenAISeeker(JobSeeker):
@@ -14,7 +17,24 @@ class OpenAISeeker(JobSeeker):
         # virtual display.
         self.display = Display(visible=0, size=(800, 600))
         self.display.start()
-        self.browser = webdriver.Firefox()
+        print("Display started!")
+
+        # Define the geckodriver path through Selenium Firefox webdriver
+        # service, extract default Firefox options and pass them to
+        # Firefox webdriver.
+        service = Service(
+            executable_path=GeckoDriverManager().install()
+
+        )
+
+        options = Options()
+
+        self.browser = webdriver.Firefox(
+            service=service,
+            options=options,
+        )
+
+        print(f"Extracting data from {self.page_url}")
         self.browser.get(self.page_url)
         return self
 
@@ -23,6 +43,7 @@ class OpenAISeeker(JobSeeker):
 
     def get_job_description(self) -> str:
         """Extract job description from current page data"""
+        print(f"Trying to extract job description from: {self.page_url}")
         element = self.browser.find_element(By.ID, "main")
         self.job_data["description"] = element.text
 
