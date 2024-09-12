@@ -11,10 +11,17 @@ from streamlit_tags import st_tags
 
 from seekers.job_seeker import JobSeeker
 from seekers.openai_seeker import OpenAISeeker
-
+from seekers.workable_seeker import WorkableSeeker
+from seekers.factorial_seeker import FactorialSeeker
+from seekers.clibrain_seeker import CliBrainSeeker
+from seekers.intelygenz_seeker import Intelygenz
 
 seekers = {
     "openai.com": OpenAISeeker,
+    "apply.workable.com": WorkableSeeker,
+    "careers.factorialhr.com": FactorialSeeker,
+    "empleo.clibrain.com": CliBrainSeeker,
+    "recruitment.intelygenz.com": Intelygenz,
 }
 
 
