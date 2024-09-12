@@ -42,7 +42,7 @@ class Intelygenz(JobSeeker):
 
     def get_job_description(self) -> str:
         """Extract job description from current page data"""
-        element = self.browser.find_element(By.CSS_SELECTOR, "div.prose.prose-block.block-max-w--sm.lg\\:max-w-600.company-links")
+        element = self.browser.find_element(By.CSS_SELECTOR, 'div[data-controller="careersite--responsive-video"]')
         self.job_data["description"] = element.text
 
         # Stop virtual display before to return data
