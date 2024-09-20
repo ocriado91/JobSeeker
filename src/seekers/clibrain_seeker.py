@@ -1,5 +1,6 @@
-# OpenAI Seeker class implementation.
-# This class implements the Job Seeker child for OpenAI.
+# CliBrain Seeker class implementation.
+# This class implements the Job Seeker child for CliBrain platform
+# (https://empleo.clibrain.com/).
 
 from pyvirtualdisplay import Display
 from selenium import webdriver
@@ -10,7 +11,7 @@ from seekers.job_seeker import JobSeeker
 from webdriver_manager.firefox import GeckoDriverManager
 
 
-class OpenAISeeker(JobSeeker):
+class CliBrainSeeker(JobSeeker):
     def __enter__(self) -> dict:
         """Build the current page Selenium object"""
         # Configure Firefox webdriver to execute into a
@@ -41,9 +42,12 @@ class OpenAISeeker(JobSeeker):
 
     def get_job_description(self) -> str:
         """Extract job description from current page data"""
-        element = self.browser.find_element(By.ID, "main")
+        element = self.browser.find_element(By.CSS_SELECTOR, 'div.mx-auto[data-controller="careersite--responsive-video"]')
+        # element = self.browser.find_element(
+        #     By.CSS_SELECTOR,
+        #     'section[data-ui="job-description"]'
+        # )
         self.job_data["description"] = element.text
-
         # Stop virtual display before to return data
         self.display.stop()
         return self.job_data

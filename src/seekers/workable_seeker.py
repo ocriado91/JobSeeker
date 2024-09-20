@@ -1,5 +1,6 @@
-# OpenAI Seeker class implementation.
-# This class implements the Job Seeker child for OpenAI.
+# Workable Seeker class implementation.
+# This class implements the Job Seeker child for Workable platform
+# (https://www.workable.com/).
 
 from pyvirtualdisplay import Display
 from selenium import webdriver
@@ -8,9 +9,9 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from seekers.job_seeker import JobSeeker
 from webdriver_manager.firefox import GeckoDriverManager
+import time
 
-
-class OpenAISeeker(JobSeeker):
+class WorkableSeeker(JobSeeker):
     def __enter__(self) -> dict:
         """Build the current page Selenium object"""
         # Configure Firefox webdriver to execute into a
@@ -34,6 +35,7 @@ class OpenAISeeker(JobSeeker):
         )
 
         self.browser.get(self.page_url)
+        time.sleep(5)
         return self
 
     def __exit__(self, exception_type, exception_value, tb):
@@ -41,9 +43,11 @@ class OpenAISeeker(JobSeeker):
 
     def get_job_description(self) -> str:
         """Extract job description from current page data"""
-        element = self.browser.find_element(By.ID, "main")
+        element = self.browser.find_element(
+            By.CSS_SELECTOR,
+            'section[data-ui="job-description"]'
+        )
         self.job_data["description"] = element.text
-
         # Stop virtual display before to return data
         self.display.stop()
         return self.job_data

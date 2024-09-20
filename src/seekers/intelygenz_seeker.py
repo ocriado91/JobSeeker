@@ -1,5 +1,6 @@
-# OpenAI Seeker class implementation.
-# This class implements the Job Seeker child for OpenAI.
+# Intelygenz Seeker class implementation.
+# This class implements the Job Seeker child for Intelygenz platform
+# (https://recruitment.intelygenz.com/).
 
 from pyvirtualdisplay import Display
 from selenium import webdriver
@@ -10,7 +11,7 @@ from seekers.job_seeker import JobSeeker
 from webdriver_manager.firefox import GeckoDriverManager
 
 
-class OpenAISeeker(JobSeeker):
+class Intelygenz(JobSeeker):
     def __enter__(self) -> dict:
         """Build the current page Selenium object"""
         # Configure Firefox webdriver to execute into a
@@ -41,7 +42,7 @@ class OpenAISeeker(JobSeeker):
 
     def get_job_description(self) -> str:
         """Extract job description from current page data"""
-        element = self.browser.find_element(By.ID, "main")
+        element = self.browser.find_element(By.CSS_SELECTOR, 'div[data-controller="careersite--responsive-video"]')
         self.job_data["description"] = element.text
 
         # Stop virtual display before to return data
