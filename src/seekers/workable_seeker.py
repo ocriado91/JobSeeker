@@ -43,11 +43,15 @@ class WorkableSeeker(JobSeeker):
 
     def get_job_description(self) -> str:
         """Extract job description from current page data"""
-        element = self.browser.find_element(
+        job_description = self.browser.find_element(
             By.CSS_SELECTOR,
             'section[data-ui="job-description"]'
-        )
-        self.job_data["description"] = element.text
+        ).text
+        job_requirements = self.browser.find_element(
+            By.CSS_SELECTOR,
+            'section[data-ui="job-requirements"]'
+        ).text
+        self.job_data["description"] = job_description + job_requirements
         # Stop virtual display before to return data
         self.display.stop()
         return self.job_data
