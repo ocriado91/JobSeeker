@@ -16,6 +16,8 @@ from seekers.factorial_seeker import FactorialSeeker
 from seekers.clibrain_seeker import CliBrainSeeker
 from seekers.intelygenz_seeker import Intelygenz
 
+from utils.config import read_stack_file
+
 seekers = {
     "openai.com": OpenAISeeker,
     "apply.workable.com": WorkableSeeker,
@@ -57,26 +59,6 @@ def read_new_file(
     return stack_file.getvalue().decode("utf-8").split()
 
 
-def read_stack_file(
-    stack_file: str = "data/default_stack.dat",
-) -> list:
-    """Read stack file and export as list
-
-    Parameters
-    ----------
-    stack_file (str): File with all target stack separated by newline.
-
-    Returns
-    ---------
-    list: A list with all target stacks.
-
-    """
-    with open(stack_file, "r") as f:
-        target_stacks = f.readlines()
-        target_stacks = [x.replace("\n", "") for x in target_stacks]
-    return target_stacks
-
-
 def extract_seeker(job_offer: str) -> JobSeeker:
     """Extract the job seeker object based on job offer url.
 
@@ -108,11 +90,14 @@ if __name__ == "__main__":
         # Insert a new stack file
         new_stack_file = st.file_uploader("Insert a new stack file")
         if new_stack_file:
-            stack_keywors = st_tags(
+            stack_keywords = st_tags(
                 value=read_new_file(new_stack_file), label="Keywords"
             )
         else:
-            stack_keywors = st_tags(value=read_stack_file(), label="Keywords")
+            stack_keywords = st_tags(value=read_stack_file(), label="Keywords")
+
+    # Lowerize stack keywords
+    stack_keywords = [x.lower() for x in stack_keywords]
 
     # Create a text box to introduce the list of job offers to process
     # and split retrieved jobs into a list.
@@ -149,9 +134,9 @@ if __name__ == "__main__":
                 continue
 
         # Process job descriptions and extract skills
-        job_descriptions = [x["description"] for x in jobs_data]
+        job_descriptions = [x["description"].lower() for x in jobs_data]
         skills = process_job_descriptions(
-            job_descriptions=job_descriptions, stack=stack_keywors
+            job_descriptions=job_descriptions, stack=stack_keywords
         )
 
         # Sort skills based on their values.
